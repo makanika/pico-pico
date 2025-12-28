@@ -1,436 +1,284 @@
-/** Adjusting Content Width **/
-:root {
-    --sidebar-width: 300px;
-    --sidebar-resize-indicator-width: 8px;
-    --sidebar-resize-indicator-space: 2px;
-    --page-padding: 15px;
-    --content-max-width: 1150px;
-    --menu-bar-height: 50px;
-    --mono-font: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
-    --code-font-size: 0.875em
-        /* please adjust the ace font size accordingly in editor.js */
+﻿:root {
+    --ink: #111322;
+    --rose: #d90429;
+    --sun: #f9b934;
+    --sea: #0ea5e9;
+    --canvas: #f2f4f8;
+    --paper: #ffffff;
+    --text-muted: #606572;
+    --border: rgba(17, 19, 34, 0.08);
+    --shadow-deep: 0 50px 90px rgba(15, 17, 30, 0.16);
+    --shadow-soft: 0 25px 55px rgba(15, 17, 30, 0.12);
+    color-scheme: only light;
 }
 
-
-
-.warning {
-    margin: 20px;
-    padding: 0 20px;
-    border-inline-start: 2px solid var(--warning-border);
+body {
+    margin: 0;
+    font-family: 'Open Sans', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(circle at top, rgba(249, 185, 52, 0.08), transparent 45%),
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 35%),
+                var(--canvas);
+    color: var(--ink);
+    line-height: 1.8;
+    font-size: 18px;
 }
 
-.warning:before {
+#mdbook-sidebar,
+#mdbook-sidebar-resize-handle,
+#mdbook-sidebar-toggle-anchor,
+#mdbook-sidebar-toggle,
+#mdbook-theme-toggle,
+#mdbook-theme-list,
+.right-buttons a[title="Print this book"],
+#print-button {
+    display: none !important;
+}
+
+html.sidebar-visible #mdbook-page-wrapper,
+#mdbook-page-wrapper {
+    margin-left: 0 !important;
+}
+
+#mdbook-menu-bar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(15, 17, 30, 0.12);
+    border-radius: 0 0 28px 28px;
+    padding: 0.75rem clamp(1.5rem, 4vw, 3rem);
+}
+
+#mdbook-menu-bar .menu-title {
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(17, 19, 34, 0.6);
+}
+
+main,
+.page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 4rem);
+}
+
+main {
+    background: var(--paper);
+    border-radius: 36px;
+    box-shadow: var(--shadow-deep);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+main > * + * {
+    margin-top: 1.3rem;
+}
+
+main h1:first-of-type {
+    font-size: clamp(3.4rem, 6vw, 5.2rem);
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+main h1:first-of-type::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 6px;
+    background: linear-gradient(90deg, var(--rose), var(--sea));
+    margin-top: 1.1rem;
+}
+
+main h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    letter-spacing: -0.01em;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+main h2::before {
+    content: "";
+    width: 48px;
+    height: 4px;
+    background: var(--sun);
     position: absolute;
-    width: 3rem;
-    height: 3rem;
-    margin-inline-start: calc(-1.5rem - 21px);
-    content: "ⓘ";
-    text-align: center;
-    background-color: var(--bg);
-    color: var(--warning-border);
-    font-weight: bold;
-    font-size: 2rem;
+    top: -1rem;
+    left: 0;
 }
 
-blockquote .warning:before {
-    background-color: var(--quote-bg);
+main h3,
+main h4 {
+    font-weight: 800;
+    color: var(--ink);
 }
 
-kbd {
-    background-color: var(--table-border-color);
-    border-radius: 4px;
-    border: solid 1px var(--theme-popup-border);
-    box-shadow: inset 0 -1px 0 var(--theme-hover);
-    display: inline-block;
-    font-size: var(--code-font-size);
-    font-family: var(--mono-font);
-    line-height: 10px;
-    padding: 4px 5px;
-    vertical-align: middle;
+p {
+    color: var(--text-muted);
+    margin: 0.95rem 0;
 }
 
-sup {
-    /* Set the line-height for superscript and footnote references so that there
-       isn't an awkward space appearing above lines that contain the footnote.
-
-       See https://github.com/rust-lang/mdBook/pull/2443#discussion_r1813773583
-       for an explanation.
-    */
-    line-height: 0;
+p:first-of-type::first-letter,
+.content main > p:first-of-type::first-letter {
+    font-size: 3.5rem;
+    float: left;
+    line-height: 0.9;
+    padding-right: 0.25rem;
+    font-weight: 700;
+    color: var(--rose);
 }
 
-:not(.footnote-definition)+.footnote-definition,
-.footnote-definition+ :not(.footnote-definition) {
-    margin-block-start: 2em;
-}
-
-.footnote-definition {
-    font-size: 0.9em;
-    margin: 0.5em 0;
-}
-
-.footnote-definition p {
-    display: inline;
-}
-
-.tooltiptext {
-    position: absolute;
-    visibility: hidden;
-    color: #fff;
-    background-color: #333;
-    transform: translateX(-50%);
-    /* Center by moving tooltip 50% of its width left */
-    left: -8px;
-    /* Half of the width of the icon */
-    top: -35px;
-    font-size: 0.8em;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 8px;
-    margin: 5px;
-    z-index: 1000;
-}
-
-.tooltipped .tooltiptext {
-    visibility: visible;
-}
-
-.chapter li.part-title {
-    color: var(--sidebar-fg);
-    margin: 5px 0px;
-    font-weight: bold;
-}
-
-.result-no-output {
+blockquote {
+    border-left: 8px solid var(--rose);
+    background: linear-gradient(180deg, rgba(217, 4, 41, 0.08), rgba(14, 165, 233, 0.05));
+    padding: 1.5rem 2rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
     font-style: italic;
 }
 
-/* Wire body */
-.wire {
-    position: relative;
-    width: 200px;
-    height: 4px;
-    border-radius: 3px;
-    margin-bottom: 20px;
-    /* Space between wires */
-
+pre,
+code {
+    background: #f9f9fb;
+    border: 1px solid rgba(17, 19, 34, 0.08);
+    border-radius: 28px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
 }
 
-/* Wire colors */
-.wire.red {
-    background: #ff0000;
+pre {
+    padding: 1.7rem;
+    line-height: 1.55;
+    font-size: 0.95rem;
 }
 
-/* Red wire */
-.wire.black {
-    background: #000000;
-    border: 2px solid #FFFFFF;
+.table-wrapper table {
+    border: 1px solid rgba(17, 19, 34, 0.08);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
 }
 
-/* Black wire */
-.wire.green {
-    background: #13d613;
+.table-wrapper th {
+    background: var(--ink);
+    color: #fff;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
 }
 
-/* Green wire */
-.wire.yellow {
-    background: #e6e61c;
+.table-wrapper td {
+    background: #fff;
+    color: var(--text-muted);
 }
 
-/* Yellow wire */
-.wire.blue {
-    background: #057af7;
+#searchbar {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(17, 19, 34, 0.08);
+    border-radius: 999px;
+    padding: 0.45rem 1.2rem;
 }
 
-/* Default blue wire */
-.wire.orange {
-    background: #fc5310;
+.nav-wrapper span.fa-svg,
+.nav-wide-wrapper span.fa-svg {
+    display: none;
 }
 
-/* Orange wire */
-.wire.brown {
-    background: #824101;
+.nav-wrapper,
+.nav-wide-wrapper {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(17, 19, 34, 0.08);
+    text-align: center;
 }
 
-/* Orange wire */
-.wire.purple {
-    background: #800080;
-}
-
-/* White wire with border to make it visible */
-.white {
-    background: #ffffff;
-    /* White color */
-    /* border: 1px dotted #AAAAAA; */
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Male connector (left) */
-.male-left {
-    position: absolute;
-    left: -19px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 8px;
-    background: #000;
-    border: 2px solid #CCC;
-}
-
-/* Pin extending from left connector */
-.male-left::after {
-    content: '';
-    position: absolute;
-    left: -12px;
-    /* Reduced gap between connector and pin */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 2px;
-    background: #555;
-    /* Pin color */
-}
-
-/* Male connector (right) */
-.male-right {
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 8px;
-    background: #000;
-    border: 2px solid #CCC;
-
-}
-
-/* Pin extending from right connector */
-.male-right::after {
-    content: '';
-    position: absolute;
-    right: -12px;
-    /* Reduced gap between connector and pin */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 2px;
-    background: #555;
-    /* Pin color */
-}
-
-/* Female connector (left) */
-.female-left {
-    position: absolute;
-    left: -19px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 8px;
-    background: #000;
-    border: 2px solid #CCC;
-}
-
-.female-left::after {
-    content: '';
-    position: absolute;
-    left: 1px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: #999;
-    border-radius: 50%;
-}
-
-/* Female connector (right) */
-.female-right {
-    position: absolute;
-    right: -19px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 8px;
-    background: #000;
-    border: 2px solid #CCC;
-}
-
-.female-right::after {
-    content: '';
-    position: absolute;
-    right: 1px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: #999;
-    border-radius: 50%;
-}
-
-.boxed-text {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-clip: padding-box;
-    transition: all 0.3s ease-in-out;
-}
-
-
-
-.alert-box {
-    display: flex;
-    align-items: flex-start;
-    /* padding: 16px; */
-    border-radius: 8px;
-    margin: 16px 0;
-    font-family: Arial, sans-serif;
-    position: relative;
-    padding: 12px 0px 0px 10px;
-}
-
-.alert-box .icon {
-    display: flex;
-    justify-content: center;
+.nav-wrapper a,
+.nav-wide-wrapper a,
+.nav-home-link {
+    display: inline-flex;
     align-items: center;
-    font-size: 16px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    /* Semi-transparent background */
-    border: 2px solid currentColor;
-    position: absolute;
-    top: 10px;
-    left: 8px;
-    color: inherit;
-    /* Matches the alert's text color */
+    justify-content: center;
+    padding: 0.95rem 2rem;
+    min-width: 200px;
+    border-radius: 999px;
+    border: 1px solid rgba(17, 19, 34, 0.08);
+    background: linear-gradient(120deg, rgba(217, 4, 41, 0.08), rgba(14, 165, 233, 0.08));
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-soft);
+    margin: 0.35rem;
+    text-decoration: none;
 }
 
-.alert-box .alert-content {
-    margin-left: 48px;
-    /* Leaves space for the round icon */
+.nav-label {
+    pointer-events: none;
 }
 
-.alert-box .alert-title {
-    margin: 0px 8px 0px 0px;
-    font-size: 18px;
-    margin-bottom: 20px;
+.nav-home-link {
+    background: linear-gradient(120deg, rgba(14, 165, 233, 0.12), rgba(249, 185, 52, 0.12));
 }
 
-/* .alert-box p { */
-/* margin: 0; */
-/* font-size: 14px; */
-/* } */
-
-.alert-box.alert-box-warning {
-    background-color: #fff4cc;
-    border: 1px solid #ffcc00;
-    color: #856404;
+.landing-hero {
+    background: linear-gradient(135deg, rgba(217, 4, 41, 0.12), rgba(14, 165, 233, 0.12)), #fff;
+    border-radius: 44px;
+    border: 1px solid rgba(217, 4, 41, 0.15);
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    box-shadow: var(--shadow-deep);
 }
 
-.alert-box.alert-box-info {
-    background-color: #E8F0Fe;
-    border: 1px solid #17a2b8;
-    color: #0c5460;
+.landing-hero h1 {
+    font-size: clamp(3.6rem, 6vw, 5.6rem);
 }
 
-.alert-box.alert-box-danger {
-    background-color: #f8d7da;
-    border: 1px solid #dc3545;
-    color: #721c24;
+.hero-stat .stat-value {
+    font-size: 1.6rem;
 }
 
-.alert-box.alert-box-success {
-    background-color: #d4edda;
-    border: 1px solid #28a745;
-    color: #155724;
+.toc-card {
+    border-radius: 32px;
+    border: 1px solid rgba(17, 19, 34, 0.06);
 }
 
-.icon i {
-    background: none !important;
-    /* Remove any background set by Font Awesome */
-    box-shadow: none !important;
-    /* Remove shadow if applied */
-    color: inherit;
-    /* Inherit alert text color */
+.chapter-index {
+    border-radius: 36px;
+    border: 1px solid rgba(17, 19, 34, 0.08);
 }
 
-/* General styles for slanted text */
-.slanted-text {
-    display: inline-block;
-    padding: 3px 6px;
-    margin: 0 5px;
-    font-weight: bold;
-    transform: skew(-8deg);
-    border-radius: 3px;
+.chapter-columns a {
+    text-transform: none;
+    letter-spacing: 0;
 }
 
-/* Individual color themes */
-.slanted-text.red {
-    /* background: linear-gradient(135deg, #e74c3c, #c0392b); */
-    background: #e74c3c;
-    color: black;
+@media (max-width: 768px) {
+    main,
+    .page {
+        padding: 1.5rem;
+    }
+
+    .landing-hero,
+    .toc-card,
+    .chapter-index {
+        border-radius: 24px;
+    }
+
+    .nav-wrapper a,
+    .nav-wide-wrapper a,
+    .nav-home-link {
+        min-width: 0;
+        width: 100%;
+    }
 }
 
-.slanted-text.yellow {
-    /* background: linear-gradient(135deg, #f39c12, #e67e22); */
-    background: #efe012;
-    color: white;
+::-webkit-scrollbar {
+    width: 12px;
 }
 
-.slanted-text.teal {
-    /* background: linear-gradient(135deg, #1abc9c, #16a085); */
-    background: #1abc9c;
-    color: black;
+::-webkit-scrollbar-thumb {
+    background: rgba(17, 19, 34, 0.25);
+    border-radius: 999px;
 }
 
-.slanted-text.blue {
-    /* background: linear-gradient(135deg, #00bcd4, #008c8c); */
-    background: #3457D5;
-    color: black;
-}
-
-.slanted-text.pink {
-    /* background: linear-gradient(135deg, #e91e63, #c2185b); */
-    background: #e91e63;
-    color: black;
-}
-
-.slanted-text.purple {
-    /* background: linear-gradient(135deg, #8e44ad, #6f4f37); */
-    background: #8e44ad;
-    color: black;
-}
-
-.slanted-text.brown {
-    /* background: linear-gradient(135deg, #6f4f37, #a0522d); */
-    background: #a0522d;
-    color: black;
-}
-
-.slanted-text.green {
-    /* background: linear-gradient(135deg, #2ecc71, #27ae60); */
-    background: #00A550;
-    color: black;
-}
-
-.slanted-text.gray {
-    background: linear-gradient(135deg, #bdc3c7, #95a5a6);
-    color: black;
-}
-
-.slanted-text.indigo {
-    background: linear-gradient(135deg, #3f51b5, #303f9f);
-    color: black;
-}
-
-
-.slanted-text.black {
-    background: #333333;
-    color: #999;
-}
-
-.slanted-text span {
-    display: inline-block;
-    transform: skew(10deg);
+::-webkit-scrollbar-track {
+    background: rgba(17, 19, 34, 0.12);
 }

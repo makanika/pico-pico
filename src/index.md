@@ -1,49 +1,138 @@
-# Pico Pico - Intro
-
-In this book, we use the Raspberry Pi Pico 2 and program it in Rust to explore various exciting projects. You'll work on exercises like dimming an LED, controlling a servo motor, measuring distance with an ultrasonic sensor, displaying the Ferris (🦀) image on an OLED display, using an RFID reader, playing songs on a buzzer, turning on an LED when the room light is off, measuring temperature, and much more.
-
-## Meet the hardware - Pico 2
-
-We will be using the Raspberry Pi Pico 2, which is based on the new RP2350 chip. It offers dual-core flexibility with support for ARM Cortex-M33 cores and optional Hazard3 RISC-V cores. By default, it operates using the standard ARM cores, but developers can choose to experiment with the RISC-V architecture if needed.
-
-You find more details from the [official website](https://www.raspberrypi.com/products/raspberry-pi-pico-2/).
-
-<div class="image-with-caption" style="text-align:center;">
-    <img src="./images/pico2.png" alt="Raspberry Pi Debug 2" style="width:400px; height:auto; display:block; margin:auto;"/>
-    <div class="caption" style="font-size:0.9em; color:#555; margin-top:6px;">Raspberry Pi Pico 2</div>
+﻿<div class="landing-hero">
+  <p class="hero-tag">Offline Edition · Pico 2 W / RP2350</p>
+  <h1>Pico Pico · Embedded Programming with Rust</h1>
+  <p>Create, instrument, and fly real projects on Raspberry Pi Pico 2 using modern Rust workflows. This deluxe offline volume packages everything: hardware prep, async firmware, peripherals, telemetry, and complete labs so you can learn on one beautiful page.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <p class="stat-label">Chapters</p>
+      <p class="stat-value">50+</p>
+      <p>Foundational + project chapters with hands-on rituals.</p>
+    </div>
+    <div class="hero-stat">
+      <p class="stat-label">Focus</p>
+      <p class="stat-value">Pico 2 / RP2350</p>
+      <p>Dual-core Cortex-M33 + Embassy async stack.</p>
+    </div>
+    <div class="hero-stat">
+      <p class="stat-label">Audience</p>
+      <p class="stat-value">Builders</p>
+      <p>From the very first blink to telemetry dashboards.</p>
+    </div>
+    <div class="hero-stat">
+      <p class="stat-label">Read Mode</p>
+      <p class="stat-value">Always Light</p>
+      <p>Designed for long-form reading on one screen.</p>
+    </div>
+  </div>
 </div>
 
+<div class="toc-section">
+  <h2>Navigator</h2>
+  <div class="toc-grid">
+    <a class="toc-card" href="./pico2-pinout.html">
+      <p class="toc-num">01</p>
+      <h3>Foundation & Hardware</h3>
+      <p>Introduction, pinouts, tools, project templates, and help desks.</p>
+      <p class="toc-links">Pinout · Hardware kit · Dev environment · Quick start · Abstraction layers</p>
+    </a>
+    <a class="toc-card" href="./led/external-led.html">
+      <p class="toc-num">02</p>
+      <h3>Signal & GPIO Stories</h3>
+      <p>LEDs, buttons, PWM shaping, servo rituals, and how to speak to the physical world.</p>
+      <p class="toc-links">External LED · Breadboards · Button logic · PWM labs · Servo builds</p>
+    </a>
+    <a class="toc-card" href="./std-to-no-std/index.html">
+      <p class="toc-num">03</p>
+      <h3>Rust Firmware Core</h3>
+      <p>no_std migrations, linker crafting, Embassy async, flashing, and VS Code happiness.</p>
+      <p class="toc-links">Cross compilation · Embassy RP · Panic handlers · Flashing guide</p>
+    </a>
+    <a class="toc-card" href="./i2c/index.html">
+      <p class="toc-num">04</p>
+      <h3>Sensor & Bus Academy</h3>
+      <p>I2C, SPI-like rituals, OLED/LCD canvases, ultrasonic range, LDR thermistry, RFID, SD, and joystick fun.</p>
+      <p class="toc-links">I²C · OLED · LCD · Ultrasonic · LDR · Thermistor · RFID · SD · Joystick</p>
+    </a>
+    <a class="toc-card" href="./debugging/index.html">
+      <p class="toc-num">05</p>
+      <h3>Debugging & Projects</h3>
+      <p>RTT traces, probe-rs, GDB missions, watchdogs, telemetry stacks, and final projects.</p>
+      <p class="toc-links">Debug probe · RTT · GDB · Watchdog · Projects · Resources</p>
+    </a>
+  </div>
+</div>
 
-> [!NOTE]
-> There is an older Raspberry Pi Pico that uses the RP2040 chip. In this book, we will be using the newer **Pico 2** with the **RP2350** chip. When buying hardware, make sure to get the correct one!
+<div class="chapter-index">
+  <h3>Complete Chapter Directory</h3>
+  <div class="chapter-columns">
+    <ul>
+      <li><strong>Orientation</strong></li>
+      <li><a href="./pico2-pinout.html">Pinout & RP2350 map</a></li>
+      <li><a href="./additional-hardware.html">Hardware companion list</a></li>
+      <li><a href="./setup.html">Dev environment & probes</a></li>
+      <li><a href="./quick-start.html">Quick start · Hello Pico</a></li>
+      <li><a href="./abstraction-layers.html">Abstraction layers tour</a></li>
+      <li><a href="./cargo-generate.html">Project template ritual</a></li>
+      <li><a href="./running.html">Run, flash, and troubleshoot</a></li>
+      <li><a href="./help.html">Help & community</a></li>
+    </ul>
+    <ul>
+      <li><strong>GPIO & Motion</strong></li>
+      <li><a href="./led/external-led.html">External LED builds</a></li>
+      <li><a href="./core-concepts/basics/breadboard.html">Breadboard primer</a></li>
+      <li><a href="./led/embedded-rust-external-led-blinky.html">Blink in Rust</a></li>
+      <li><a href="./core-concepts/basics/button.html">Buttons & pull resistors</a></li>
+      <li><a href="./core-concepts/pwm/index.html">PWM theory + labs</a></li>
+      <li><a href="./led/pwm-dimming/index.html">LED dimming clinics</a></li>
+      <li><a href="./servo/index.html">Servo control series</a></li>
+    </ul>
+    <ul>
+      <li><strong>Firmware Craft</strong></li>
+      <li><a href="./std-to-no-std/index.html">From std to no_std</a></li>
+      <li><a href="./std-to-no-std/cross-compilation/index.html">Cross compilation guide</a></li>
+      <li><a href="./std-to-no-std/embassy-rp.html">Embassy on RP</a></li>
+      <li><a href="./pico-in-vscode/create-rust-project.html">VS Code rituals</a></li>
+      <li><a href="./core-concepts/watchdog.html">Watchdog & safety</a></li>
+      <li><a href="./debugging/pico-debug-probe.html">Debug probe setup</a></li>
+      <li><a href="./debugging/gdb/probe-rs-debug-probe.html">GDB + probe-rs</a></li>
+    </ul>
+    <ul>
+      <li><strong>Sensors, Displays & Storage</strong></li>
+      <li><a href="./i2c/index.html">I²C & bus primer</a></li>
+      <li><a href="./oled/index.html">OLED showcase</a></li>
+      <li><a href="./lcd-display/index.html">LCD characters + custom glyphs</a></li>
+      <li><a href="./ultrasonic/index.html">Ultrasonic distance</a></li>
+      <li><a href="./ldr/index.html">LDR night light</a></li>
+      <li><a href="./thermistor/index.html">Thermistors & maths</a></li>
+      <li><a href="./rfid/index.html">RFID adventures</a></li>
+      <li><a href="./sdcard/index.html">SD logging</a></li>
+      <li><a href="./joystick/index.html">Joystick telemetry</a></li>
+    </ul>
+    <ul>
+      <li><strong>Sound, Projects & Resources</strong></li>
+      <li><a href="./buzzer/intro.html">Buzzer orchestra</a></li>
+      <li><a href="./projects.html">Project gallery</a></li>
+      <li><a href="./resources.html">Resource vault</a></li>
+    </ul>
+  </div>
+</div>
 
-There is also a variant called the Pico 2 W, which includes Wi‑Fi and Bluetooth capabilities and is powered by the RP2350 chip. However, it is not fully compatible with the examples we've provided. If you want to follow along without adjustments, we recommend using the standard Pico 2 (non‑wireless) version. If you choose to buy the Pico 2 W or already have one, you still can follow along. Expect small differences, such as the onboard LED being used by Wi-Fi by default, but the core concepts remain the same.
+## Preface
 
-## Datasheets
+Welcome to the Kololo-inspired Pico 2 W companion. Everything from tactile builds to telemetry dashboards is here so you can stay immersed without juggling PDFs or tiny screens. Pick any chapter above or follow the pagination controls at the bottom of every page.
 
-For detailed technical information, specifications, and guidelines, refer to the official datasheets:
+## Datasheets & References
 
 - [Pico 2 Datasheet](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf)
-- [RP2350 chip Datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf)
+- [RP2350 Datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf)
+- [Original project on GitHub](https://github.com/ImplFerris/pico-pico)
 
+## License & Attribution
 
-## License
+- Code samples: dual-licensed under [MIT](https://opensource.org/licenses/MIT) and [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+- Written prose: [CC-BY-SA v4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+- Circuit illustrations: built with Fritzing.
 
-The Pico Pico book(this project) is distributed under the following licenses:
+## Support & Disclaimer
 
-* The code samples and free-standing Cargo projects contained within this book are licensed under the terms of both the [MIT License] and the [Apache License v2.0].
-* The written prose contained within this book is licensed under the terms of the Creative Commons [CC-BY-SA v4.0] license.
-* Circuit diagrams in this book were created with Fritzing.
-
-[MIT License]: https://opensource.org/licenses/MIT
-[Apache License v2.0]: http://www.apache.org/licenses/LICENSE-2.0
-[CC-BY-SA v4.0]: https://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-
-## Support this project
-
-You can support this book by starring this project on [GitHub](https://github.com/ImplFerris/pico-pico) or sharing this book with others 😊
-
-### Disclaimer
-
-The experiments and projects shared in this book have worked for me, but results may vary. I'm not responsible for any issues or damage that may occur while you're experimenting. Please proceed with caution and take necessary safety precautions.
+You can support the project by starring it on GitHub or sharing it with other builders. The experiments documented here worked for the original crew but always exercise caution, follow safety doctrine, and double-check hardware setups before applying power.
